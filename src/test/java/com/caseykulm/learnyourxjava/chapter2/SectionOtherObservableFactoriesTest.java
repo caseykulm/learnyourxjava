@@ -1,6 +1,8 @@
 package com.caseykulm.learnyourxjava.chapter2;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -93,5 +95,37 @@ public class SectionOtherObservableFactoriesTest {
         System.out::println,
         Throwable::printStackTrace,
         () -> System.out.println("Done 👍"));
+  }
+
+  @Test
+  public void modifyingInputsToObservableWillNotAffectIt() throws Exception {
+    int start = 5;
+    Observable<Integer> range = Observable.range(start, 3);
+    range.subscribe(System.out::println);
+
+    start = 10;
+    range.subscribe(System.out::println);
+  }
+
+  private static int start = 5;
+  @Test
+  public void deferExampleToDelayObservableConstruction() throws Exception {
+    Observable<Integer> range = Observable.defer(() -> Observable.range(start, 3));
+    range.subscribe(System.out::println);
+
+    start = 10;
+    range.subscribe(System.out::println);
+  }
+
+  @Test
+  public void divideBy0NotPropogatedToOnError() throws Exception {
+    Observable.just(1 / 0)
+        .subscribe(System.out::println, Throwable::printStackTrace);
+  }
+
+  @Test
+  public void fromCallableExampleToPropogateToOnError() throws Exception {
+    Observable.fromCallable(() -> 1/0)
+        .subscribe(System.out::println, Throwable::printStackTrace);
   }
 }
