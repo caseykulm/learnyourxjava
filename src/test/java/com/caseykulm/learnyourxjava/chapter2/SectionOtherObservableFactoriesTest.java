@@ -117,7 +117,7 @@ public class SectionOtherObservableFactoriesTest {
     range.subscribe(System.out::println);
   }
 
-  @Test
+  @Test(expected = ArithmeticException.class)
   public void divideBy0NotPropogatedToOnError() throws Exception {
     Observable.just(1 / 0)
         .subscribe(System.out::println, Throwable::printStackTrace);
