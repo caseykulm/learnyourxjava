@@ -1,19 +1,18 @@
 package com.caseykulm.learnyourxjava.chapter2;
 
+import com.caseykulm.learnyourxjava.models.Toggle;
 import io.reactivex.Observable;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class SectionHotObservablesTest {
   private SectionHotObservables subj;
-  private SectionHotObservables.Toggle toggle;
+  private Toggle toggle;
 
   @Before
   public void setUp() throws Exception {
     subj = new SectionHotObservables();
-    toggle = new SectionHotObservables.Toggle();
+    toggle = new Toggle();
   }
 
   @Test
