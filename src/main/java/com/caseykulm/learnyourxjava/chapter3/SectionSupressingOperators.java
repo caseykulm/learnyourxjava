@@ -16,4 +16,6 @@ public class SectionSupressingOperators {
       "dog");
 
   public Observable<Long> interval = Observable.interval(100, TimeUnit.MILLISECONDS);
+
+  public Observable<Integer> range = Observable.range(1, 100);
 }
