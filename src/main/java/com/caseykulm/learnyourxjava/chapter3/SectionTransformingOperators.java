@@ -18,4 +18,6 @@ public class SectionTransformingOperators {
       "wabbit1",
       "wabbit2",
       "wabbit3");
+
+  public Observable<Integer> range = Observable.range(1, 10);
 }

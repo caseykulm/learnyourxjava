@@ -1,6 +1,7 @@
 package com.caseykulm.learnyourxjava.chapter3;
 
 import java.util.Comparator;
+import java.util.concurrent.TimeUnit;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -55,6 +56,36 @@ public class SectionTransformingOperatorsTest {
   public void sortedExample() throws Exception {
     subj.words
         .sorted(Comparator.comparingInt(String::length))
+        .subscribe(System.out::println);
+  }
+
+  @Test
+  public void delayExample() throws Exception {
+    subj.words
+        .delay(500, TimeUnit.MILLISECONDS)
+        .subscribe(System.out::println);
+
+    TimeUnit.SECONDS.sleep(1);
+  }
+
+  @Test
+  public void repeatExample() throws Exception {
+    subj.words
+        .repeat(3)
+        .subscribe(System.out::println);
+  }
+
+  @Test
+  public void scanExample() throws Exception {
+    subj.range
+        .scan((acc, next) -> acc + next)
+        .subscribe(System.out::println);
+  }
+
+  @Test
+  public void scanWordCountExample() throws Exception {
+    subj.words
+        .scan(0, (acc, next) -> acc + 1)
         .subscribe(System.out::println);
   }
 }
